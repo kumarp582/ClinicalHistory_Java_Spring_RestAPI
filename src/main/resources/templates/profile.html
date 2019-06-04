@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" layout:decorate="~{main}">
+<head>
+    <script th:src="@{/material/materialize.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/material/materialize.min.css}">
+    <link rel="stylesheet" th:href="@{/fonts/icon.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+<body>
+
+<section layout:fragment="content">
+    <div class="navbar-fixed text-primary">
+        <nav>
+            <div class="nav-wrapper blue-grey">
+                <a th:href="@{~/}" class="brand-logo">Logo</a>
+
+
+                <ul id="nav-mobile" class="left hide-on-med-and-down">
+                    <li><a th:href="@{~/}" ><i class="material-icons">home</i></a></li>
+                </ul>
+                <div class="right profile-padding" th:text="${profile.firstName +' '+ profile.lastName}"></div>
+            </div>
+        </nav>
+    </div>
+    <div class="main-container">
+        <div th:switch="${profile}">
+            <h2 th:case="null">No profile foud!</h2>
+            <div th:case="*">
+                <div class="row">
+                    <div class="col s12 m12">
+                        <div class="card primary darken-1">
+                            <div class="card-content">
+                                <span class="card-title blue-grey-text" th:text="${profile.firstName +' '+ profile.lastName} + ' medical history'"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col s12 m6">
+                        <div class="card darken-1">
+                            <div class="card-content">
+                                <span class="card-title blue-grey-text">Info</span>
+                                <ul class="collection">
+                                    <li class="collection-item" th:text="'Age: '+ ${profile.age}"></li>
+                                    <li class="collection-item" th:text="'Smoking: '+ ${profile.smoking ? 'YES' : 'NO' }"></li>
+                                    <li class="collection-item" th:text="'Alcohol: '+ ${profile.alcohol ? 'YES' : 'NO'}"></li>
+                                    <li class="collection-item" th:text="'Social History: '+ ${profile.socialHistory}"></li>
+                                    <li class="collection-item" th:text="'Family History: '+ ${profile.familyHistory}"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col s12 m6">
+                        <div class="card darken-1">
+                            <div class="card-content">
+                                <span class="card-title blue-grey-text">Address</span>
+                                <div>
+                                    <div th:text="${profile.address.addressOne}"></div>
+                                    <div th:text="${profile.address.city}"></div>
+                                    <div th:text="${profile.address.state}"></div>
+                                    <div th:text="${profile.address.zipCode}"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col s12 m12">
+                        <div class="card primary darken-1">
+                            <div class="card-content">
+                                <span class="card-title blue-grey-text">Past Medical History</span>
+                                <div th:each="pmh : ${profile.pastMedicalHistories}">
+                                    <span th:text="${pmh.description}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col s12 m12">
+                        <div class="card primary darken-1">
+                            <div class="card-content">
+                                <span class="card-title blue-grey-text">Past Surgical History</span>
+                                <div th:each="psh : ${profile.pastSurgicalHistories}">
+                                    <span th:text="${psh.name}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col s12 m6">
+                        <div class="card darken-1">
+                            <div class="card-content ">
+                                <span class="card-title blue-grey-text">Medicines</span>
+                                <div th:each="medicine : ${profile.medicines}">
+                                    <span th:text="${medicine}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m6">
+                        <div class="card darken-1">
+                            <div class="card-content">
+                                <span class="card-title blue-grey-text">Allergies</span>
+                                <div th:each="allergy : ${profile.allergies}">
+                                    <span th:text="${allergy}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col s12 m12">
+                        <div class="card darken-1">
+                            <div class="card-content">
+                                <span class="card-title blue-grey-text">Physical Examination</span>
+                                <ul class="collection">
+                                <li class="collection-item" th:each="pe : ${profile.physicalExamination}">
+                                    <span th:text="${pe}"></span>
+                                </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col s12 m12">
+                        <div class="card darken-1">
+                            <div class="card-content">
+                                <span class="card-title blue-grey-text">Diseases Predicted</span>
+                                <ul class="collection">
+                                    <li class="collection-item" th:each="disease : ${profile.diseasesPredicted}">
+                                        <span th:text="${disease}"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

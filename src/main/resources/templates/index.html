@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" layout:decorate="~{main}">
+<head>
+    <script th:src="@{/material/materialize.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/material/materialize.min.css}">
+    <link rel="stylesheet" th:href="@{/fonts/icon.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+<body>
+
+<section layout:fragment="content">
+    <div class="navbar-fixed text-primary">
+        <nav>
+            <div class="nav-wrapper blue-grey">
+                <a th:href="@{~/}" class="brand-logo">Logo</a>
+                <div class="right profile-padding">
+                    profile
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="main-container">
+
+        <div th:switch="${users}">
+            <h2 th:case="null">No Profiles Added so far !!</h2>
+            <div th:case="*">
+                <ul class="collection">
+                    <li class="collection-item avatar" th:each="user : ${users}">
+                        <i class="material-icons circle">account_circle</i>
+                        <span class="title">Mr</span>
+                        <p class="blue-grey-text"><span th:text="${user.firstName}"></span> <br>
+                            <span th:text="${user.lastName}"></span>
+                        </p>
+                        <a th:href="@{/profile/{id}(id=${user.id})}" class="secondary-content blue-grey-text"><i class="material-icons">arrow_forward</i> Show Details</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

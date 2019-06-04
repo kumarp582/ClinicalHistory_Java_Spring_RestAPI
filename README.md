@@ -29,5 +29,5 @@ Ex request:
 
 ```url=jdbc:h2:mem:ph;DB_CLOSE_DELAY=-1
 username=sa
-password=
+password=Leave password field empty
 ```
